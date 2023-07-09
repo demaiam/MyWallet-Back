@@ -9,7 +9,7 @@ export async function signup(req, res) {
 
   try {
     const searchUser = await db.collection("users").findOne({ email });
-    if (searchUser) return res.status(404).send("Email já cadastrado");
+    if (searchUser) return res.status(409).send("Email já cadastrado");
 
     await db.collection("users").insertOne({ name, email, password: hash });
     res.sendStatus(201);
@@ -34,7 +34,7 @@ export async function signin(req, res) {
 
     const data = { token: token, name: searchUser.name };
 
-    res.send(data);
+    res.status(200).send(data);
   } catch (err) {
     res.status(500).send(err.message);
   }
