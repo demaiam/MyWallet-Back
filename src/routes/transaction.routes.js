@@ -9,6 +9,6 @@ const transactionRouter = Router();
 transactionRouter.use(validateAuth);
 
 transactionRouter.get("/home", getTransaction);
-transactionRouter.post("/tnova-transacao/:tipo", validateSchema(schemaTransaction), createTransaction);
+transactionRouter.post("/nova-transacao/:tipo", validateSchema(schemaTransaction), createTransaction);
 
 export default transactionRouter;
