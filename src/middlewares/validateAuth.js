@@ -12,7 +12,7 @@ export async function validateAuth(req, res, next) {
 
         const user = await db.collection("users").findOne({ _id: session.userId });
         if (!user) return res.sendStatus(401);
-
+        
         delete user.password;
     
         res.locals.user = user;
