@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 export async function createTransaction(req, res) {
   const { value, description } = req.body;
-  const { type } = req.params;
+  const { type } = req.params['tipo'];
   const user = res.locals.user;
 
   try {
