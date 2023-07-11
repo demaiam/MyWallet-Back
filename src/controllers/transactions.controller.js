@@ -4,11 +4,7 @@ import dayjs from "dayjs";
 export async function createTransaction(req, res) {
   const { value, description } = req.body;
   const { type } = req.params;
-  const { auth } = req.headers;
-
-  const token = auth?.replace("Bearer ", "");
-  const session = await db.collection("session").findOne({ token });
-  const user = await db.collection("users").findOne({ _id: session.idUser });
+  const user = res.locals.user;
 
   try {
     await db.collection("transactions").insertOne({
@@ -25,11 +21,7 @@ export async function createTransaction(req, res) {
 }
 
 export async function getTransactions(req, res) {
-  const { auth } = req.headers;
-
-  const token = auth?.replace("Bearer ", "");
-  const session = await db.collection("session").findOne({ token });
-  const user = await db.collection("users").findOne({ _id: session.idUser });
+  const user = res.locals.user;
 
   try { 
     const transactions = await db.collection("transactions").find({ idUser: user.idUser }).toArray();
