@@ -3,13 +3,13 @@ import dayjs from "dayjs";
 
 export async function createTransaction(req, res) {
   const { value, description } = req.body;
-  const { type } = req.params;
+  const { tipo } = req.params;
   const user = res.locals.user;
 
   try {
     await db.collection("transactions").insertOne({
       idUser: user._id,
-      type: type,
+      type: tipo,
       value: value,
       description: description,
       time: dayjs().format('DD/MM')
