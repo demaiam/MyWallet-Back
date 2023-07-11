@@ -30,10 +30,10 @@ export async function signin(req, res) {
 
     const token = uuid();
 
-    await db.collection("session").deleteMany({ userId: searchUser._id });
-    await db.collection("session").insertOne({ token, userId: searchUser._id });
+    await db.collection("session").deleteMany({ idUser: searchUser._id });
+    await db.collection("session").insertOne({ token, idUser: searchUser._id });
 
-    const data = { token: token, name: searchUser.name };
+    const data = { name: searchUser.name, token: token };
 
     res.status(200).send(data);
   } catch (err) {
